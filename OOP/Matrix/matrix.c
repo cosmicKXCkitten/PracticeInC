@@ -82,6 +82,7 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->columns = columns;
 
     matrix->at = atMatrix;
+    matrix->isSquare = isSquareMatrix;
 
     // Memory allocation for rows
     struct Row *pRows = (struct Row*)malloc(rows * sizeof(struct Row));
@@ -135,4 +136,15 @@ TYPE_ELEM atMatrix(int row, int column, struct Matrix matrix)
     TYPE_ELEM element = matrix.pRows[row].elements[column];
 
     return element;
+}
+
+// Check if matrix is ​​square
+int isSquareMatrix(struct Matrix matrix) 
+{
+    if (matrix.rows = matrix.columns) 
+    {
+        return 1;
+    }
+
+    return 0;
 }

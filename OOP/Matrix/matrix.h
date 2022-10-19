@@ -52,6 +52,7 @@ int DestructorRow(struct Row);
 */
 struct Matrix;
 typedef TYPE_ELEM (*FuncAt) (int, int, struct Matrix);
+typedef int (*FuncIsSquare) (struct Matrix);
 typedef struct Matrix
 {
     struct Matrix* pThis;
@@ -64,6 +65,7 @@ typedef struct Matrix
         Functions for computed matrix
     */
     FuncAt at;
+    FuncIsSquare isSquare;
 };
 
 /*
@@ -81,5 +83,8 @@ int DestructorMatrix(struct Matrix);
 
 // Access element of Matrix
 TYPE_ELEM atMatrix(int, int, struct Matrix);
+
+// Check if matrix is ​​square
+int isSquareMatrix(struct Matrix);
 
 #endif
