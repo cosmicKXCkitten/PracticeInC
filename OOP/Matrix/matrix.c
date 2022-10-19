@@ -83,6 +83,7 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
 
     matrix->at = atMatrix;
     matrix->isSquare = isSquareMatrix;
+    matrix->det = detMatrix;
 
     // Memory allocation for rows
     struct Row *pRows = (struct Row*)malloc(rows * sizeof(struct Row));
@@ -147,4 +148,13 @@ int isSquareMatrix(struct Matrix matrix)
     }
 
     return 0;
+}
+
+// Computed determinant of matrix
+TYPE_ELEM detMatrix(struct Matrix matrix) 
+{
+    // Check is square matrix
+    // ...
+
+    return 0.0;
 }
