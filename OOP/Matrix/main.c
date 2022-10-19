@@ -16,6 +16,8 @@ int main(void)
 
     printf("a = %.3f\n", a);
 
+    matrix.print(matrix);
+
     DestructorMatrix(matrix);
 
     return 0;

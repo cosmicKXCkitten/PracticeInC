@@ -85,6 +85,8 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->isSquare = isSquareMatrix;
     matrix->det = detMatrix;
 
+    matrix->print = printMatrix;
+
     // Memory allocation for rows
     struct Row *pRows = (struct Row*)malloc(rows * sizeof(struct Row));
 
@@ -157,4 +159,18 @@ TYPE_ELEM detMatrix(struct Matrix matrix)
     // ...
 
     return 0.0;
+}
+
+// Print matrix
+void printMatrix(struct Matrix matrix) 
+{
+    for (int i = 0; i < matrix.rows; ++i) 
+    {
+        for (int j = 0; j < matrix.columns; ++j) 
+        {
+            printf("%.3f\t", matrix.at(i, j, matrix));
+        }
+
+        printf("\n");
+    }
 }

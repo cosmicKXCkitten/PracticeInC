@@ -54,6 +54,7 @@ struct Matrix;
 typedef TYPE_ELEM (*FuncAt) (int, int, struct Matrix);
 typedef int (*FuncIsSquare) (struct Matrix);
 typedef TYPE_ELEM (*FuncDetMatrix) (struct Matrix);
+typedef void (*FuncPrintMatrix) (struct Matrix);
 typedef struct Matrix
 {
     struct Matrix* pThis;
@@ -68,6 +69,8 @@ typedef struct Matrix
     FuncAt at;
     FuncIsSquare isSquare;
     FuncDetMatrix det;
+
+    FuncPrintMatrix print;
 };
 
 /*
@@ -91,5 +94,8 @@ int isSquareMatrix(struct Matrix);
 
 // Computed determinant of matrix
 TYPE_ELEM detMatrix(struct Matrix);
+
+// Print matrix
+void printMatrix(struct Matrix);
 
 #endif
