@@ -144,7 +144,7 @@ TYPE_ELEM atMatrix(int row, int column, struct Matrix matrix)
 // Check if matrix is ​​square
 int isSquareMatrix(struct Matrix matrix) 
 {
-    if (matrix.rows = matrix.columns) 
+    if (matrix.rows == matrix.columns) 
     {
         return 1;
     }
@@ -152,11 +152,25 @@ int isSquareMatrix(struct Matrix matrix)
     return 0;
 }
 
+// Expand determinant by line
+TYPE_ELEM expandByLine(struct Matrix matrix) 
+{
+    // Base of expand
+    
+}
+
 // Computed determinant of matrix
 TYPE_ELEM detMatrix(struct Matrix matrix) 
 {
     // Check is square matrix
     // ...
+
+    if (matrix.isSquare(matrix)) 
+    {
+        TYPE_ELEM determinant = 0;
+
+
+    }
 
     return 0.0;
 }
