@@ -25,6 +25,7 @@
 */
 struct Matrix;
 typedef TYPE_ELEM (*FuncAt) (const struct Matrix, int, int);
+typedef void (*FuncSet) (struct Matrix, int, int, TYPE_ELEM);
 typedef int (*FuncIsSquare) (const struct Matrix);
 typedef TYPE_ELEM (*FuncDetMatrix) (const struct Matrix);
 typedef void (*FuncPrintMatrix) (const struct Matrix);
@@ -40,6 +41,7 @@ typedef struct Matrix
         Functions for computed matrix
     */
     FuncAt at;
+    FuncSet set;
     FuncIsSquare isSquare;
     FuncDetMatrix det;
 
@@ -64,6 +66,9 @@ int DestructorMatrix(struct Matrix);
 
 // Access element of Matrix
 TYPE_ELEM atMatrix(const struct Matrix, int, int);
+
+// Change value element of Matrix
+void setValueElementOfMatrix(struct Matrix, int, int, TYPE_ELEM);
 
 // Check if matrix is ​​square
 int isSquareMatrix(const struct Matrix);

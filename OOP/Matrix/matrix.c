@@ -22,6 +22,7 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->columns = columns;
 
     matrix->at = atMatrix;
+    matrix->set = setValueElementOfMatrix;
     matrix->isSquare = isSquareMatrix;
     matrix->det = detMatrix;
 
@@ -65,7 +66,7 @@ struct Matrix MatrixCopy(const struct Matrix matrix)
     {
         for (int j = 0; j < matrix.columns; ++j) 
         {
-            cpMatrix.pRows[i].elements[j] = matrix.at(matrix, i, j);
+            cpMatrix.set(cpMatrix, i, j, matrix.at(matrix, i, j));
         }
     }
 
@@ -98,6 +99,17 @@ TYPE_ELEM atMatrix(const struct Matrix matrix, int row, int column)
     TYPE_ELEM element = matrix.pRows[row].elements[column];
 
     return element;
+}
+
+// Change value element of Matrix
+void setValueElementOfMatrix(struct Matrix matrix, int row, int column, TYPE_ELEM value) 
+{
+    if ((matrix.rows <= row) || (matrix.columns <= column))
+    {
+        return;
+    }
+
+    matrix.pRows[row].elements[column] = value;
 }
 
 // Check if matrix is ​​square
