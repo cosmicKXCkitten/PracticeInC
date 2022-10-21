@@ -5,16 +5,16 @@ int main(void)
 {
     TYPE_ELEM m[3][3] =
     {
-        {0.04, 0.05, 0.06},
-        {0.07, 0.08, 0.09},
+        {1, 2, 3},
+        {4, 4, 0.09},
         {0.10, 0.11, 0.12},
     };
 
-    struct Matrix matrix = MatrixParams(3, 3, m);
+    struct Matrix matrix = MatrixParams(2, 2, m);
 
-    TYPE_ELEM a = matrix.at(1, 1, matrix);
+    TYPE_ELEM a = matrix.at(matrix, 0, 0);
 
-    printf("a = %.3f\n", a);
+    printf("determinant = %.3f\n", matrix.det(matrix));
 
     matrix.print(matrix);
 

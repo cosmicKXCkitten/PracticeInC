@@ -129,7 +129,7 @@ int DestructorMatrix(struct Matrix matrix)
 }
 
 // Access element of Matrix
-TYPE_ELEM atMatrix(int row, int column, struct Matrix matrix) 
+TYPE_ELEM atMatrix(struct Matrix matrix, int row, int column)
 {
     if ((matrix.rows <= row) || (matrix.columns <= column)) 
     {
@@ -152,24 +152,78 @@ int isSquareMatrix(struct Matrix matrix)
     return 0;
 }
 
+/*
 // Expand determinant by line
 TYPE_ELEM expandByLine(struct Matrix matrix) 
 {
     // Base of expand
     
+    TYPE_ELEM determinant = 0;
+
+    for (int i = 0; i < matrix.columns; ++i) 
+    {
+        determinant += pow(-1, row + i) * expandByLine();
+    }
 }
+*/
 
 // Computed determinant of matrix
 TYPE_ELEM detMatrix(struct Matrix matrix) 
 {
-    // Check is square matrix
-    // ...
+    /*
+        The determinant will be calculated 
+        using the decomposition on the first row.
+    */
 
+    // Check is square matrix
     if (matrix.isSquare(matrix)) 
     {
+        // Matrix has one element
+        if (matrix.rows == 1) 
+        {
+            return matrix.at(matrix, 0, 0);
+        }
+
         TYPE_ELEM determinant = 0;
 
+        // Matrix has four elements
+        if (matrix.rows == 2) 
+        {
+            determinant = matrix.at(matrix, 0, 0) * matrix.at(matrix, 1, 1) - 
+                          matrix.at(matrix, 0, 1) * matrix.at(matrix, 1, 0);
+        }
 
+        for (int k = 0; k < matrix.rows; ++k) 
+        {
+            /*
+                A = (-1)^(i + j) * Minor, where i and j - indices
+
+                sign = (-1)^(i + j), where:
+                    1. i = 1 (decomposition on the first row)
+                    2. j = k
+
+                Eventually: sign = (-1)^(1 + k + 1), since 
+                in mathematics indexing starts from one
+            */
+            TYPE_ELEM sign = pow(-1, k + 2);
+
+            /*
+                factor = a[i][j] * sign (without multiplication by minor)
+            */
+            TYPE_ELEM factor = matrix.at(matrix, 0, k) * sign;
+
+            /*
+                [member of decomposition] = factor * Minor
+                (where the minor is the determinant 
+                of the matrix of the order below)
+            */
+            TYPE_ELEM member = factor * matrix.det(matrix);
+            // !!! Attention - formule is not right
+
+            determinant += member;
+        }
+
+        return determinant;
     }
 
     return 0.0;
@@ -182,7 +236,7 @@ void printMatrix(struct Matrix matrix)
     {
         for (int j = 0; j < matrix.columns; ++j) 
         {
-            printf("%.3f\t", matrix.at(i, j, matrix));
+            printf("%.3f\t", matrix.at(matrix, i, j));
         }
 
         printf("\n");

@@ -15,6 +15,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 
 /*
@@ -51,7 +52,7 @@ int DestructorRow(struct Row);
     Matrix consists of Rows.
 */
 struct Matrix;
-typedef TYPE_ELEM (*FuncAt) (int, int, struct Matrix);
+typedef TYPE_ELEM (*FuncAt) (struct Matrix, int, int);
 typedef int (*FuncIsSquare) (struct Matrix);
 typedef TYPE_ELEM (*FuncDetMatrix) (struct Matrix);
 typedef void (*FuncPrintMatrix) (struct Matrix);
@@ -87,7 +88,7 @@ struct Matrix MatrixParams(int, int, TYPE_ELEM *);
 int DestructorMatrix(struct Matrix);
 
 // Access element of Matrix
-TYPE_ELEM atMatrix(int, int, struct Matrix);
+TYPE_ELEM atMatrix(struct Matrix, int, int);
 
 // Check if matrix is ​​square
 int isSquareMatrix(struct Matrix);
