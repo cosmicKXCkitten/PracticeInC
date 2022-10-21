@@ -1,66 +1,6 @@
 #include "matrix.h"
 
 /*
-    Implementation functions for working with rows.
-*/
-
-// Row default constructor
-struct Row Row(int size) 
-{
-    return RowParams(size, NULL);
-}
-
-// Row constructor with parameters
-struct Row RowParams(int size, TYPE_ELEM *values) 
-{
-    // Memory allocation for row
-    struct Row* row = (struct Row*)malloc(sizeof(struct Row));
-
-    // Initialization fields of Row
-    row->pThis = row;
-    row->size = size;
-
-    // Memory allocation for array of elements
-    TYPE_ELEM *elements = (TYPE_ELEM *)malloc(size * sizeof(TYPE_ELEM));
-
-    // Initialization elements of Row
-    row->elements = elements;
-
-    if (values == NULL) 
-    {
-        // Zero initialization
-        for (int i = 0; i < size; ++i) 
-        {
-            row->elements[i] = 0;
-        }
-    }
-    else 
-    {
-        // Initialization by values
-        for (int i = 0; i < size; ++i) 
-        {
-            row->elements[i] = values[i];
-        } 
-    }
-
-    return *row;
-}
-
-// Row destructor
-int DestructorRow(struct Row row) 
-{
-    // Free memory row of elements
-    free(row.elements);
-
-    // Free memory of row
-    free(row.pThis);
-
-    return 0;
-}
-
-/*****************************************************************************/
-
-/*
     Implementation functions for working with matrices.
 */
 
@@ -152,21 +92,6 @@ int isSquareMatrix(struct Matrix matrix)
     return 0;
 }
 
-/*
-// Expand determinant by line
-TYPE_ELEM expandByLine(struct Matrix matrix) 
-{
-    // Base of expand
-    
-    TYPE_ELEM determinant = 0;
-
-    for (int i = 0; i < matrix.columns; ++i) 
-    {
-        determinant += pow(-1, row + i) * expandByLine();
-    }
-}
-*/
-
 // Computed determinant of matrix
 TYPE_ELEM detMatrix(struct Matrix matrix) 
 {
@@ -192,44 +117,46 @@ TYPE_ELEM detMatrix(struct Matrix matrix)
             determinant = matrix.at(matrix, 0, 0) * matrix.at(matrix, 1, 1) - 
                           matrix.at(matrix, 0, 1) * matrix.at(matrix, 1, 0);
         }
-
-        for (int k = 0; k < matrix.rows; ++k) 
+        else if (matrix.rows >= 3) 
         {
-            /*
-                A = (-1)^(i + j) * Minor, where i and j - indices
+            for (int k = 0; k < matrix.rows; ++k)
+            {
+                /*
+                    A = (-1)^(i + j) * Minor, where i and j - indices
 
-                sign = (-1)^(i + j), where:
-                    1. i = 1 (decomposition on the first row)
-                    2. j = k
+                    sign = (-1)^(i + j), where:
+                        1. i = 1 (decomposition on the first row)
+                        2. j = k
 
-                Eventually: sign = (-1)^(1 + k + 1), since 
-                in mathematics indexing starts from one
-            */
-            TYPE_ELEM sign = pow(-1, k + 2);
+                    Eventually: sign = (-1)^(1 + k + 1), since
+                    in mathematics indexing starts from one
+                */
+                TYPE_ELEM sign = pow(-1, k + 2);
 
-            /*
-                factor = a[i][j] * sign (without multiplication by minor)
-            */
-            TYPE_ELEM factor = matrix.at(matrix, 0, k) * sign;
+                /*
+                    factor = a[i][j] * sign (without multiplication by minor)
+                */
+                TYPE_ELEM factor = matrix.at(matrix, 0, k) * sign;
 
-            /*
-                Create new matrix for compute Minor
-            */
-            //TYPE_ELEM *values;
+                /*
+                    Create new matrix for compute Minor
+                */
+                // TYPE_ELEM *values;
 
-            //struct Matrix minor = MatrixParams(matrix.rows - 1, matrix.columns - 1, values);
+                // struct Matrix minor = MatrixParams(matrix.rows - 1, matrix.columns - 1, values);
 
-            /*
-                [member of decomposition] = factor * Minor
-                (where the minor is the determinant 
-                of the matrix of the order below)
-            */
-            TYPE_ELEM member = factor * matrix.det(matrix);
-            // !!! Attention - formule is not right
+                /*
+                    [member of decomposition] = factor * Minor
+                    (where the minor is the determinant
+                    of the matrix of the order below)
+                */
+                TYPE_ELEM member = factor * matrix.det(matrix);
+                // !!! Attention - formule is not right
 
-            determinant += member;
+                determinant += member;
+            }
         }
-
+        
         return determinant;
     }
 
