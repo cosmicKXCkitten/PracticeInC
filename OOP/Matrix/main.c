@@ -5,20 +5,22 @@ int main(void)
 {
     TYPE_ELEM m[3][3] =
     {
-        {1, 2, 3},
-        {4, 4, 0.09},
-        {0.10, 0.11, 0.12},
+        {0.01, 0.02, 0.03},
+        {0.04, 0.05, 0.06},
+        {0.07, 0.08, 0.09},
     };
 
-    struct Matrix matrix = MatrixParams(2, 2, m);
+    struct Matrix matrix1 = MatrixParams(2, 2, m);
+    struct Matrix matrix2 = MatrixCopy(matrix1);    
 
-    TYPE_ELEM a = matrix.at(matrix, 0, 0);
+    printf("Matrix1:\n");
+    matrix1.print(matrix1);
 
-    printf("determinant = %.3f\n", matrix.det(matrix));
+    printf("Matrix2:\n");
+    matrix2.print(matrix2);
 
-    matrix.print(matrix);
-
-    DestructorMatrix(matrix);
+    DestructorMatrix(matrix1);
+    DestructorMatrix(matrix2);
 
     return 0;
 }

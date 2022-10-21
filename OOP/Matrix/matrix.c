@@ -53,6 +53,25 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
     return *matrix;   
 }
 
+// Matrix copy constructor
+struct Matrix MatrixCopy(const struct Matrix matrix) 
+{
+    // Create default matrix
+    struct Matrix cpMatrix = Matrix(matrix.rows, matrix.columns);
+
+    // Copy values to cpMatrix
+
+    for (int i = 0; i < matrix.rows; ++i) 
+    {
+        for (int j = 0; j < matrix.columns; ++j) 
+        {
+            cpMatrix.pRows[i].elements[j] = matrix.at(matrix, i, j);
+        }
+    }
+
+    return cpMatrix;
+}
+
 // Matrix destructor
 int DestructorMatrix(struct Matrix matrix) 
 {
@@ -69,7 +88,7 @@ int DestructorMatrix(struct Matrix matrix)
 }
 
 // Access element of Matrix
-TYPE_ELEM atMatrix(struct Matrix matrix, int row, int column)
+TYPE_ELEM atMatrix(const struct Matrix matrix, int row, int column)
 {
     if ((matrix.rows <= row) || (matrix.columns <= column)) 
     {
@@ -82,7 +101,7 @@ TYPE_ELEM atMatrix(struct Matrix matrix, int row, int column)
 }
 
 // Check if matrix is ​​square
-int isSquareMatrix(struct Matrix matrix) 
+int isSquareMatrix(const struct Matrix matrix) 
 {
     if (matrix.rows == matrix.columns) 
     {
@@ -93,7 +112,7 @@ int isSquareMatrix(struct Matrix matrix)
 }
 
 // Computed determinant of matrix
-TYPE_ELEM detMatrix(struct Matrix matrix) 
+TYPE_ELEM detMatrix(const struct Matrix matrix) 
 {
     /*
         The determinant will be calculated 
@@ -164,7 +183,7 @@ TYPE_ELEM detMatrix(struct Matrix matrix)
 }
 
 // Print matrix
-void printMatrix(struct Matrix matrix) 
+void printMatrix(const struct Matrix matrix) 
 {
     for (int i = 0; i < matrix.rows; ++i) 
     {

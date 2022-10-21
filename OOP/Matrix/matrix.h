@@ -24,10 +24,10 @@
     Matrix consists of Rows.
 */
 struct Matrix;
-typedef TYPE_ELEM (*FuncAt) (struct Matrix, int, int);
-typedef int (*FuncIsSquare) (struct Matrix);
-typedef TYPE_ELEM (*FuncDetMatrix) (struct Matrix);
-typedef void (*FuncPrintMatrix) (struct Matrix);
+typedef TYPE_ELEM (*FuncAt) (const struct Matrix, int, int);
+typedef int (*FuncIsSquare) (const struct Matrix);
+typedef TYPE_ELEM (*FuncDetMatrix) (const struct Matrix);
+typedef void (*FuncPrintMatrix) (const struct Matrix);
 typedef struct Matrix
 {
     struct Matrix* pThis;
@@ -57,21 +57,21 @@ struct Matrix Matrix(int, int);
 struct Matrix MatrixParams(int, int, TYPE_ELEM *);
 
 // Matrix copy constructor
-//struct Matrix MatrixCopy(struct Matrix);
+struct Matrix MatrixCopy(const struct Matrix);
 
 // Matrix destructor
 int DestructorMatrix(struct Matrix);
 
 // Access element of Matrix
-TYPE_ELEM atMatrix(struct Matrix, int, int);
+TYPE_ELEM atMatrix(const struct Matrix, int, int);
 
 // Check if matrix is ​​square
-int isSquareMatrix(struct Matrix);
+int isSquareMatrix(const struct Matrix);
 
 // Computed determinant of matrix
-TYPE_ELEM detMatrix(struct Matrix);
+TYPE_ELEM detMatrix(const struct Matrix);
 
 // Print matrix
-void printMatrix(struct Matrix);
+void printMatrix(const struct Matrix);
 
 #endif
