@@ -178,7 +178,7 @@ TYPE_ELEM detMatrix(struct Matrix matrix)
     // Check is square matrix
     if (matrix.isSquare(matrix)) 
     {
-        // Matrix has one element
+        // Matrix (or Minor) has one element
         if (matrix.rows == 1) 
         {
             return matrix.at(matrix, 0, 0);
@@ -186,7 +186,7 @@ TYPE_ELEM detMatrix(struct Matrix matrix)
 
         TYPE_ELEM determinant = 0;
 
-        // Matrix has four elements
+        // Matrix (or Minor) has four elements
         if (matrix.rows == 2) 
         {
             determinant = matrix.at(matrix, 0, 0) * matrix.at(matrix, 1, 1) - 
@@ -211,6 +211,13 @@ TYPE_ELEM detMatrix(struct Matrix matrix)
                 factor = a[i][j] * sign (without multiplication by minor)
             */
             TYPE_ELEM factor = matrix.at(matrix, 0, k) * sign;
+
+            /*
+                Create new matrix for compute Minor
+            */
+            //TYPE_ELEM *values;
+
+            //struct Matrix minor = MatrixParams(matrix.rows - 1, matrix.columns - 1, values);
 
             /*
                 [member of decomposition] = factor * Minor

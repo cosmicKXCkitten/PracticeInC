@@ -84,6 +84,9 @@ struct Matrix Matrix(int, int);
 // Matrix constructor with parameters
 struct Matrix MatrixParams(int, int, TYPE_ELEM *);
 
+// Matrix copy constructor
+//struct Matrix MatrixCopy(struct Matrix);
+
 // Matrix destructor
 int DestructorMatrix(struct Matrix);
 
