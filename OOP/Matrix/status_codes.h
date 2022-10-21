@@ -11,6 +11,7 @@ typedef enum STATUS_CODE
     OK = 0,
     ERROR = 1,
     BAD_INPUT_VALUE = 2,
+    MEMORY_ALLOCATION_ERROR = 3,
 };
 
 #endif

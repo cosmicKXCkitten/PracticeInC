@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "status_codes.h"
 #include "row.h"
 
 
@@ -29,6 +30,8 @@ typedef void (*FuncSet) (struct Matrix, int, int, TYPE_ELEM);
 typedef int (*FuncIsSquare) (const struct Matrix);
 typedef TYPE_ELEM (*FuncDetMatrix) (const struct Matrix);
 typedef void (*FuncPrintMatrix) (const struct Matrix);
+typedef void (*FuncSetStatusCode) (struct Matrix, enum STATUS_CODE);
+typedef enum STATUS_CODE (*FuncGetStatusCode) (const struct Matrix);
 typedef struct Matrix
 {
     struct Matrix* pThis;
@@ -37,6 +40,7 @@ typedef struct Matrix
     int columns;
     struct Row *pRows;
 
+    enum STATUS_CODE lastStatusCode;
     /*
         Functions for computed matrix
     */
@@ -46,6 +50,8 @@ typedef struct Matrix
     FuncDetMatrix det;
 
     FuncPrintMatrix print;
+    FuncSetStatusCode setStatusCode;
+    FuncGetStatusCode getStatusCode;
 };
 
 /*
@@ -78,5 +84,11 @@ TYPE_ELEM detMatrix(const struct Matrix);
 
 // Print matrix
 void printMatrix(const struct Matrix);
+
+// Set status code of complete last operation
+void setStatusCodeOfMatrix(struct Matrix, enum STATUS_CODE);
+
+// Get status code of complete last operation
+enum STATUS_CODE getStatusCodeOfMatrix(const struct Matrix);
 
 #endif

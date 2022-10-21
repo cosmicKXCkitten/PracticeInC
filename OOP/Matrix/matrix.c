@@ -27,6 +27,8 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->det = detMatrix;
 
     matrix->print = printMatrix;
+    matrix->setStatusCode = setStatusCodeOfMatrix;
+    matrix->getStatusCode = getStatusCodeOfMatrix;
 
     // Memory allocation for rows
     struct Row *pRows = (struct Row*)malloc(rows * sizeof(struct Row));
@@ -93,6 +95,7 @@ TYPE_ELEM atMatrix(const struct Matrix matrix, int row, int column)
 {
     if ((matrix.rows <= row) || (matrix.columns <= column)) 
     {
+        matrix.setStatusCode(matrix, BAD_INDEX);
         return 0;
     }
 
@@ -106,6 +109,7 @@ void setValueElementOfMatrix(struct Matrix matrix, int row, int column, TYPE_ELE
 {
     if ((matrix.rows <= row) || (matrix.columns <= column))
     {
+        matrix.setStatusCode(matrix, BAD_INDEX);
         return;
     }
 
@@ -206,4 +210,16 @@ void printMatrix(const struct Matrix matrix)
 
         printf("\n");
     }
+}
+
+// Set status code of complete last operation
+void setStatusCodeOfMatrix(struct Matrix matrix, enum STATUS_CODE status_code) 
+{
+    matrix.lastStatusCode = status_code;
+}
+
+// Get status code of complete last operation
+enum STATUS_CODE getStatusCodeOfMatrix(const struct Matrix matrix) 
+{
+    return matrix.lastStatusCode;
 }
