@@ -4,8 +4,12 @@
     [Attention!!!] This is a helper type - its use in user code
     is strictly prohibited.
 */
-#ifndef ROW
-#define ROW
+#ifndef __ROW_H__
+#define __ROW_H__
+
+#if !defined (__MATRIX_H__)
+#error "Only <matrix.h> can be included directly."
+#endif
 
 // Row element type
 #define TYPE_ELEM double
@@ -13,7 +17,7 @@
 #include <stdlib.h>
 
 
-typedef struct Row
+struct Row
 {
     struct Row *pThis;
 
@@ -34,4 +38,4 @@ struct Row RowParams(int, TYPE_ELEM *);
 // Row destructor
 int DestructorRow(struct Row);
 
-#endif
+#endif /* __ROW_H__ */

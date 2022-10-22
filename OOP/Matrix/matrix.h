@@ -6,9 +6,11 @@
 
     [Dangerous!!!] Please do not forget to call the destructor for each 
     instance of the matrix when working with these matrices.
+
+    Author: Konstantin Epishin <konstantinepishinxdevs@gmail.com>
 */
-#ifndef MATRIX
-#define MATRIX
+#ifndef __MATRIX_H__
+#define __MATRIX_H__
 
 // Matrix element type
 #define TYPE_ELEM double
@@ -16,6 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include "types.h"
 #include "status_codes.h"
 #include "row.h"
 
@@ -24,16 +27,10 @@
     Struct for Matrix.
     Matrix consists of Rows.
 */
-struct Matrix;
-typedef TYPE_ELEM (*FuncAt) (const struct Matrix, int, int);
-typedef void (*FuncSet) (struct Matrix, int, int, TYPE_ELEM);
-typedef int (*FuncIsSquare) (const struct Matrix);
-typedef TYPE_ELEM (*FuncDetMatrix) (const struct Matrix);
-typedef void (*FuncPrintMatrix) (const struct Matrix);
-typedef void (*FuncSetStatusCode) (struct Matrix, enum STATUS_CODE);
-typedef enum STATUS_CODE (*FuncGetStatusCode) (const struct Matrix);
-typedef struct Matrix
+struct Matrix
 {
+    /* private */
+
     struct Matrix* pThis;
 
     int rows;
@@ -41,9 +38,13 @@ typedef struct Matrix
     struct Row *pRows;
 
     enum STATUS_CODE lastStatusCode;
+
+    /* public */
+
     /*
         Functions for computed matrix
     */
+
     FuncAt at;
     FuncSet set;
     FuncIsSquare isSquare;
@@ -91,4 +92,4 @@ void setStatusCodeOfMatrix(struct Matrix, enum STATUS_CODE);
 // Get status code of complete last operation
 enum STATUS_CODE getStatusCodeOfMatrix(const struct Matrix);
 
-#endif
+#endif /* __MATRIX_H__ */
