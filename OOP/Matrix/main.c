@@ -19,8 +19,9 @@ int main(void)
     printf("Matrix2:\n");
     matrix2.print(matrix2);
 
-    matrix1.at(matrix1, 1, 1);
-    printf("Last status code: %d", matrix1.getStatusCode(matrix1));
+    matrix1.at(matrix1, 5, 5);
+    matrix1.setStatusCode(matrix1, BAD_INDEX);
+    printf("Last status code: %s", matrix1.getStatusCode(matrix1));
 
     DestructorMatrix(matrix1);
     DestructorMatrix(matrix2);

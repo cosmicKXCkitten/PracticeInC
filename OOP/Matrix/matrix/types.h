@@ -18,6 +18,6 @@ typedef int (*FuncIsSquare) (const struct Matrix);
 typedef TYPE_ELEM (*FuncDetMatrix) (const struct Matrix);
 typedef void (*FuncPrintMatrix) (const struct Matrix);
 typedef void (*FuncSetStatusCode) (struct Matrix, enum STATUS_CODE);
-typedef enum STATUS_CODE (*FuncGetStatusCode) (const struct Matrix);
+typedef char* (*FuncGetStatusCode) (const struct Matrix);
 
 #endif /* __TYPES_H__ */

@@ -53,6 +53,9 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
         }
     }
 
+    // Initialize status code of Matrix
+    matrix->lastStatusCode = OK;
+
     return *matrix;   
 }
 
@@ -219,7 +222,31 @@ void setStatusCodeOfMatrix(struct Matrix matrix, enum STATUS_CODE status_code)
 }
 
 // Get status code of complete last operation
-enum STATUS_CODE getStatusCodeOfMatrix(const struct Matrix matrix) 
+char* getStatusCodeOfMatrix(const struct Matrix matrix) 
 {
-    return matrix.lastStatusCode;
+    switch (matrix.lastStatusCode)
+    {
+        case (BAD_INDEX): 
+        {
+            return "BAD_INDEX";
+        }
+        case (OK):
+        {
+            return "OK";
+        }
+        case (ERROR):
+        {
+            return "ERROR";
+        }
+        case (BAD_INPUT_VALUE):
+        {
+            return "BAD_INPUT_VALUE";
+        }
+        case (MEMORY_ALLOCATION_ERROR):
+        {
+            return "MEMORY_ALLOCATION_ERROR";
+        }
+    }
+
+    return "UNKNOWN ERROR";
 }

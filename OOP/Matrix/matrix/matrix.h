@@ -92,7 +92,7 @@ void printMatrix(const struct Matrix);
 void setStatusCodeOfMatrix(struct Matrix, enum STATUS_CODE);
 
 // Get status code of complete last operation
-enum STATUS_CODE getStatusCodeOfMatrix(const struct Matrix);
+char* getStatusCodeOfMatrix(const struct Matrix);
 
 #undef __COMPILATION__
 
