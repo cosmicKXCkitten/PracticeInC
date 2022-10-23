@@ -1,6 +1,10 @@
 #ifndef STATUS_CODES
 #define STATUS_CODES
 
+#if !defined(__MATRIX_H__) && !defined(__COMPILATION__)
+#error "Only <matrix.h> can be included directly."
+#endif
+
 /*
     Status codes for analyzing the operation 
     of programs (their output values)

@@ -1,3 +1,5 @@
+#define __COMPILATION__
+
 #include "row.h"
 
 /*
@@ -57,3 +59,5 @@ int DestructorRow(struct Row row)
 
     return 0;
 }
+
+#undef __COMPILATION__

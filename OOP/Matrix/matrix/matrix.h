@@ -9,8 +9,10 @@
 
     Author: Konstantin Epishin <konstantinepishinxdevs@gmail.com>
 */
-#ifndef __MATRIX_H__
-#define __MATRIX_H__
+#ifndef __MATRIX_CLASS_H__
+#define __MATRIX_CLASS_H__
+
+#define __COMPILATION__
 
 // Matrix element type
 #define TYPE_ELEM double
@@ -92,4 +94,6 @@ void setStatusCodeOfMatrix(struct Matrix, enum STATUS_CODE);
 // Get status code of complete last operation
 enum STATUS_CODE getStatusCodeOfMatrix(const struct Matrix);
 
-#endif /* __MATRIX_H__ */
+#undef __COMPILATION__
+
+#endif /* __MATRIX_CLASS_H__ */

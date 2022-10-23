@@ -4,10 +4,10 @@
     [Attention!!!] This is a helper type - its use in user code
     is strictly prohibited.
 */
-#ifndef __ROW_H__
-#define __ROW_H__
+#ifndef __ROW_CLASS_H__
+#define __ROW_CLASS_H__
 
-#if !defined (__MATRIX_H__)
+#if !defined(__MATRIX_H__) && !defined(__COMPILATION__)
 #error "Only <matrix.h> can be included directly."
 #endif
 
@@ -38,4 +38,4 @@ struct Row RowParams(int, TYPE_ELEM *);
 // Row destructor
 int DestructorRow(struct Row);
 
-#endif /* __ROW_H__ */
+#endif /* __ROW_CLASS_H__ */

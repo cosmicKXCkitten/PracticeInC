@@ -4,7 +4,7 @@
 #ifndef __TYPES_H__
 #define __TYPES_H__
 
-#if !defined (__MATRIX_H__)
+#if !defined(__MATRIX_H__) && !defined(__COMPILATION__)
 #error "Only <matrix.h> can be included directly."
 #endif
 
