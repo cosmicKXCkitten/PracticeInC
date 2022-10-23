@@ -5,13 +5,13 @@
 */
 
 // Matrix default constructor
-struct Matrix Matrix(int rows, int columns) 
+struct Matrix* Matrix(int rows, int columns) 
 {
     return MatrixParams(rows, columns, NULL);
 }
 
 // Matrix constructor with parameters
-struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values) 
+struct Matrix* MatrixParams(int rows, int columns, TYPE_ELEM *values) 
 {
     // Memory allocation for matrix
     struct Matrix *matrix = (struct Matrix*)malloc(sizeof(struct Matrix));
@@ -56,22 +56,21 @@ struct Matrix MatrixParams(int rows, int columns, TYPE_ELEM *values)
     // Initialize status code of Matrix
     matrix->lastStatusCode = OK;
 
-    return *matrix;   
+    return matrix;   
 }
 
 // Matrix copy constructor
-struct Matrix MatrixCopy(const struct Matrix matrix) 
+struct Matrix* MatrixCopy(const struct Matrix* matrix) 
 {
     // Create default matrix
-    struct Matrix cpMatrix = Matrix(matrix.rows, matrix.columns);
+    struct Matrix* cpMatrix = Matrix(matrix->rows, matrix->columns);
 
     // Copy values to cpMatrix
-
-    for (int i = 0; i < matrix.rows; ++i) 
+    for (int i = 0; i < matrix->rows; ++i) 
     {
-        for (int j = 0; j < matrix.columns; ++j) 
+        for (int j = 0; j < matrix->columns; ++j) 
         {
-            cpMatrix.set(cpMatrix, i, j, matrix.at(matrix, i, j));
+            cpMatrix->set(cpMatrix, i, j, matrix->at(matrix, i, j));
         }
     }
 
@@ -79,50 +78,50 @@ struct Matrix MatrixCopy(const struct Matrix matrix)
 }
 
 // Matrix destructor
-int DestructorMatrix(struct Matrix matrix) 
+int DestructorMatrix(struct Matrix* matrix) 
 {
     // Call destructor for rows
-    for (int i = 0; i < matrix.rows; ++i) 
+    for (int i = 0; i < matrix->rows; ++i) 
     {
-        DestructorRow(matrix.pRows[i]);
+        DestructorRow(matrix->pRows[i]);
     }
 
     // Free memory of matrix
-    free(matrix.pThis);
+    free(matrix->pThis);
 
     return 0;
 }
 
 // Access element of Matrix
-TYPE_ELEM atMatrix(const struct Matrix matrix, int row, int column)
+TYPE_ELEM atMatrix(const struct Matrix* matrix, int row, int column)
 {
-    if ((matrix.rows <= row) || (matrix.columns <= column)) 
+    if ((matrix->rows <= row) || (matrix->columns <= column)) 
     {
-        matrix.setStatusCode(matrix, BAD_INDEX);
+        matrix->setStatusCode(matrix, BAD_INDEX);
         return 0;
     }
 
-    TYPE_ELEM element = matrix.pRows[row].elements[column];
+    TYPE_ELEM element = matrix->pRows[row].elements[column];
 
     return element;
 }
 
 // Change value element of Matrix
-void setValueElementOfMatrix(struct Matrix matrix, int row, int column, TYPE_ELEM value) 
+void setValueElementOfMatrix(struct Matrix* matrix, int row, int column, TYPE_ELEM value) 
 {
-    if ((matrix.rows <= row) || (matrix.columns <= column))
+    if ((matrix->rows <= row) || (matrix->columns <= column))
     {
-        matrix.setStatusCode(matrix, BAD_INDEX);
+        matrix->setStatusCode(matrix, BAD_INDEX);
         return;
     }
 
-    matrix.pRows[row].elements[column] = value;
+    matrix->pRows[row].elements[column] = value;
 }
 
 // Check if matrix is ​​square
-int isSquareMatrix(const struct Matrix matrix) 
+int isSquareMatrix(const struct Matrix* matrix) 
 {
-    if (matrix.rows == matrix.columns) 
+    if (matrix->rows == matrix->columns) 
     {
         return 1;
     }
@@ -131,7 +130,7 @@ int isSquareMatrix(const struct Matrix matrix)
 }
 
 // Computed determinant of matrix
-TYPE_ELEM detMatrix(const struct Matrix matrix) 
+TYPE_ELEM detMatrix(const struct Matrix* matrix) 
 {
     /*
         The determinant will be calculated 
@@ -139,25 +138,25 @@ TYPE_ELEM detMatrix(const struct Matrix matrix)
     */
 
     // Check is square matrix
-    if (matrix.isSquare(matrix)) 
+    if (matrix->isSquare(matrix)) 
     {
         // Matrix (or Minor) has one element
-        if (matrix.rows == 1) 
+        if (matrix->rows == 1) 
         {
-            return matrix.at(matrix, 0, 0);
+            return matrix->at(matrix, 0, 0);
         }
 
         TYPE_ELEM determinant = 0;
 
         // Matrix (or Minor) has four elements
-        if (matrix.rows == 2) 
+        if (matrix->rows == 2) 
         {
-            determinant = matrix.at(matrix, 0, 0) * matrix.at(matrix, 1, 1) - 
-                          matrix.at(matrix, 0, 1) * matrix.at(matrix, 1, 0);
+            determinant = matrix->at(matrix, 0, 0) * matrix->at(matrix, 1, 1) - 
+                          matrix->at(matrix, 0, 1) * matrix->at(matrix, 1, 0);
         }
-        else if (matrix.rows >= 3) 
+        else if (matrix->rows >= 3) 
         {
-            for (int k = 0; k < matrix.rows; ++k)
+            for (int k = 0; k < matrix->rows; ++k)
             {
                 /*
                     A = (-1)^(i + j) * Minor, where i and j - indices
@@ -174,7 +173,7 @@ TYPE_ELEM detMatrix(const struct Matrix matrix)
                 /*
                     factor = a[i][j] * sign (without multiplication by minor)
                 */
-                TYPE_ELEM factor = matrix.at(matrix, 0, k) * sign;
+                TYPE_ELEM factor = matrix->at(matrix, 0, k) * sign;
 
                 /*
                     Create new matrix for compute Minor
@@ -188,7 +187,7 @@ TYPE_ELEM detMatrix(const struct Matrix matrix)
                     (where the minor is the determinant
                     of the matrix of the order below)
                 */
-                TYPE_ELEM member = factor * matrix.det(matrix);
+                TYPE_ELEM member = factor * matrix->det(matrix);
                 // !!! Attention - formule is not right
 
                 determinant += member;
@@ -202,13 +201,13 @@ TYPE_ELEM detMatrix(const struct Matrix matrix)
 }
 
 // Print matrix
-void printMatrix(const struct Matrix matrix) 
+void printMatrix(const struct Matrix* matrix) 
 {
-    for (int i = 0; i < matrix.rows; ++i) 
+    for (int i = 0; i < matrix->rows; ++i) 
     {
-        for (int j = 0; j < matrix.columns; ++j) 
+        for (int j = 0; j < matrix->columns; ++j) 
         {
-            printf("%.3f\t", matrix.at(matrix, i, j));
+            printf("%.3f\t", matrix->at(matrix, i, j));
         }
 
         printf("\n");
@@ -216,15 +215,15 @@ void printMatrix(const struct Matrix matrix)
 }
 
 // Set status code of complete last operation
-void setStatusCodeOfMatrix(struct Matrix matrix, enum STATUS_CODE status_code) 
+void setStatusCodeOfMatrix(struct Matrix* matrix, enum STATUS_CODE status_code) 
 {
-    matrix.lastStatusCode = status_code;
+    matrix->lastStatusCode = status_code;
 }
 
 // Get status code of complete last operation
-char* getStatusCodeOfMatrix(const struct Matrix matrix) 
+char* getStatusCodeOfMatrix(const struct Matrix* matrix) 
 {
-    switch (matrix.lastStatusCode)
+    switch (matrix->lastStatusCode)
     {
         case (BAD_INDEX): 
         {

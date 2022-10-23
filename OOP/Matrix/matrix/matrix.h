@@ -62,37 +62,37 @@ struct Matrix
 */
 
 // Matrix default constructor
-struct Matrix Matrix(int, int);
+struct Matrix* Matrix(int, int);
 
 // Matrix constructor with parameters
-struct Matrix MatrixParams(int, int, TYPE_ELEM *);
+struct Matrix* MatrixParams(int, int, TYPE_ELEM *);
 
 // Matrix copy constructor
-struct Matrix MatrixCopy(const struct Matrix);
+struct Matrix* MatrixCopy(const struct Matrix*);
 
 // Matrix destructor
-int DestructorMatrix(struct Matrix);
+int DestructorMatrix(struct Matrix*);
 
 // Access element of Matrix
-TYPE_ELEM atMatrix(const struct Matrix, int, int);
+TYPE_ELEM atMatrix(const struct Matrix*, int, int);
 
 // Change value element of Matrix
-void setValueElementOfMatrix(struct Matrix, int, int, TYPE_ELEM);
+void setValueElementOfMatrix(struct Matrix*, int, int, TYPE_ELEM);
 
 // Check if matrix is ​​square
-int isSquareMatrix(const struct Matrix);
+int isSquareMatrix(const struct Matrix*);
 
 // Computed determinant of matrix
-TYPE_ELEM detMatrix(const struct Matrix);
+TYPE_ELEM detMatrix(const struct Matrix*);
 
 // Print matrix
-void printMatrix(const struct Matrix);
+void printMatrix(const struct Matrix*);
 
 // Set status code of complete last operation
-void setStatusCodeOfMatrix(struct Matrix, enum STATUS_CODE);
+void setStatusCodeOfMatrix(struct Matrix*, enum STATUS_CODE);
 
 // Get status code of complete last operation
-char* getStatusCodeOfMatrix(const struct Matrix);
+char* getStatusCodeOfMatrix(const struct Matrix*);
 
 #undef __COMPILATION__
 
