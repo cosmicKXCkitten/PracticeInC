@@ -1,5 +1,5 @@
-#ifndef STATUS_CODES
-#define STATUS_CODES
+#ifndef __STATUS_CODES_H__
+#define __STATUS_CODES_H__
 
 #if !defined(__MATRIX_H__) && !defined(__COMPILATION__)
 #error "Only <matrix.h> can be included directly."
@@ -18,4 +18,4 @@ typedef enum STATUS_CODE
     INITIALIZATION_ERROR = 4,
 };
 
-#endif
+#endif /* __STATUS_CODES_H__ */
