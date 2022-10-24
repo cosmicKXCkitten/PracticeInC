@@ -16,6 +16,7 @@ typedef TYPE_ELEM (*FuncAt) (const struct Matrix*, int, int);
 typedef void (*FuncSet) (struct Matrix*, int, int, TYPE_ELEM);
 typedef int (*FuncIsSquare) (const struct Matrix*);
 typedef TYPE_ELEM (*FuncDetMatrix) (const struct Matrix*);
+typedef struct Matrix* (*FuncMinorMatrix) (const struct Matrix*, int, int);
 typedef void (*FuncPrintMatrix) (const struct Matrix*);
 typedef void (*FuncSetStatusCode) (struct Matrix*, enum STATUS_CODE);
 typedef char* (*FuncGetStatusCode) (const struct Matrix*);

@@ -16,6 +16,7 @@ typedef enum STATUS_CODE
     BAD_INPUT_VALUE = 2,
     MEMORY_ALLOCATION_ERROR = 3,
     INITIALIZATION_ERROR = 4,
+    BAD_OPERATION = 5,
 };
 
 #endif /* __STATUS_CODES_H__ */

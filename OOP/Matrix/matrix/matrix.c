@@ -25,6 +25,7 @@ struct Matrix* MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->set = setValueElementOfMatrix;
     matrix->isSquare = isSquareMatrix;
     matrix->det = detMatrix;
+    matrix->minorMatrix = createMinorMatrix;
 
     matrix->print = printMatrix;
     matrix->setStatusCode = setStatusCodeOfMatrix;
@@ -92,6 +93,7 @@ struct Matrix *MatrixByMask(int rows, int columns, int *mask)
     matrix->set = setValueElementOfMatrix;
     matrix->isSquare = isSquareMatrix;
     matrix->det = detMatrix;
+    matrix->minorMatrix = createMinorMatrix;
 
     matrix->print = printMatrix;
     matrix->setStatusCode = setStatusCodeOfMatrix;
@@ -154,7 +156,7 @@ TYPE_ELEM atMatrix(const struct Matrix* matrix, int row, int column)
     if ((matrix->rows <= row) || ((matrix->pRows[row]).size <= column)) 
     {
         matrix->setStatusCode(matrix, BAD_INDEX);
-        return -1;
+        return 0;
     }
 
     TYPE_ELEM element = matrix->pRows[row].elements[column];
@@ -189,8 +191,10 @@ int isSquareMatrix(const struct Matrix* matrix)
 TYPE_ELEM detMatrix(const struct Matrix* matrix) 
 {
     /*
-        The determinant will be calculated 
+        The determinant will be calculated
         using the decomposition on the first row.
+
+        !!! Not efficient but working solution
     */
 
     // Check is square matrix
@@ -212,7 +216,7 @@ TYPE_ELEM detMatrix(const struct Matrix* matrix)
         }
         else if (matrix->rows >= 3) 
         {
-            for (int k = 0; k < matrix->rows; ++k)
+            for (int k = 0; k < matrix->columns; ++k)
             {
                 /*
                     A = (-1)^(i + j) * Minor, where i and j - indices
@@ -232,21 +236,18 @@ TYPE_ELEM detMatrix(const struct Matrix* matrix)
                 TYPE_ELEM factor = matrix->at(matrix, 0, k) * sign;
 
                 /*
-                    Create new matrix for compute Minor
-                */
-                // TYPE_ELEM *values;
-
-                // struct Matrix minor = MatrixParams(matrix.rows - 1, matrix.columns - 1, values);
-
-                /*
                     [member of decomposition] = factor * Minor
                     (where the minor is the determinant
                     of the matrix of the order below)
                 */
-                TYPE_ELEM member = factor * matrix->det(matrix);
-                // !!! Attention - formule is not right
+                struct Matrix* minorOfMatrix = matrix->minorMatrix(matrix, 0, k);
+
+                // !!! Not efficient but working solution
+                TYPE_ELEM member = factor * minorOfMatrix->det(minorOfMatrix);
 
                 determinant += member;
+
+                DestructorMatrix(minorOfMatrix);
             }
         }
         
@@ -254,6 +255,47 @@ TYPE_ELEM detMatrix(const struct Matrix* matrix)
     }
 
     return 0.0;
+}
+
+// Create minor matrix (not number - matrix)
+struct Matrix *createMinorMatrix(const struct Matrix *matrix, int rowDeleted, int columnDeleted) 
+{
+    if (matrix->isSquare(matrix)) 
+    {
+        // Create minor of matrix
+        struct Matrix *minorMatrix = Matrix(matrix->rows - 1, matrix->columns - 1);
+
+        // For minor
+        int m = 0, n = 0;
+
+        // Filling the minor with values
+        for (int i = 0; i < matrix->rows; ++i, ++m) 
+        {
+            if (i != rowDeleted) 
+            {   
+                n = 0;
+                for (int j = 0; j < matrix->columns; ++j, ++n)
+                {
+                    if (j != columnDeleted)
+                    {
+                        minorMatrix->set(minorMatrix, m, n, matrix->at(matrix, i, j));
+                    }
+                    else 
+                    {
+                        n -= 1;
+                    }
+                }
+            }
+            else 
+            {
+                m -= 1;
+            }
+        }
+
+        return minorMatrix;
+    }
+
+    matrix->setStatusCode(matrix, BAD_OPERATION);
 }
 
 // Print matrix
@@ -265,7 +307,8 @@ void printMatrix(const struct Matrix* matrix)
         {
             TYPE_ELEM value = matrix->at(matrix, i, j); 
             
-            if (value != -1) 
+            // !!! Attention - logic is not right
+            if (value != 0) 
             {
                 printf("%.3f\t", value);
             }
@@ -305,6 +348,10 @@ char* getStatusCodeOfMatrix(const struct Matrix* matrix)
         case (INITIALIZATION_ERROR):
         {
             return "INITIALIZATION_ERROR";
+        }
+        case (BAD_OPERATION):
+        {
+            return "BAD_OPERATION";
         }
     }
 

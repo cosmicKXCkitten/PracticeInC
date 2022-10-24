@@ -51,6 +51,7 @@ struct Matrix
     FuncSet set;
     FuncIsSquare isSquare;
     FuncDetMatrix det;
+    FuncMinorMatrix minorMatrix;
 
     FuncPrintMatrix print;
     FuncSetStatusCode setStatusCode;
@@ -90,6 +91,9 @@ int isSquareMatrix(const struct Matrix*);
 
 // Computed determinant of matrix
 TYPE_ELEM detMatrix(const struct Matrix*);
+
+// Create minor matrix (not number - matrix)
+struct Matrix* createMinorMatrix(const struct Matrix*, int, int);
 
 // Print matrix
 void printMatrix(const struct Matrix*);
