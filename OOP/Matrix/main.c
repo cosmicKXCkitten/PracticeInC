@@ -39,5 +39,20 @@ int main(void)
     DestructorMatrix(matrixMask);
     DestructorMatrix(matrixDefault);
 
+    double fullMask[5][5] = 
+    {
+        {1, 0, 0, 0, 0},
+        {2, 3, 0, 0, 0},
+        {4, 5, 6, 0, 0,},
+        {7, 8, 9, 10, 0},
+        {11, 12, 13, 14, 15},
+    };
+
+    struct Matrix* matrixFullMask = MatrixByFullMask(5, 5, mask, fullMask);
+    printf("Matrix by full mask:\n");
+    matrixFullMask->print(matrixFullMask);
+
+    DestructorMatrix(matrixFullMask);
+
     return 0;
 }

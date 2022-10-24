@@ -73,6 +73,9 @@ struct Matrix* MatrixCopy(const struct Matrix*);
 // Matrix by mask (zero initialization)
 struct Matrix* MatrixByMask(int, int, int*);
 
+// Matrix by mask with values
+struct Matrix* MatrixByFullMask(int, int, int*, TYPE_ELEM *);
+
 // Matrix destructor
 int DestructorMatrix(struct Matrix*);
 

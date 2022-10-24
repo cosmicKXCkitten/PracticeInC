@@ -114,6 +114,25 @@ struct Matrix *MatrixByMask(int rows, int columns, int *mask)
     return matrix;
 }
 
+// Matrix by mask with values
+struct Matrix *MatrixByFullMask(int rows, int columns, int *mask, TYPE_ELEM *fullMask) 
+{
+    // Create matrix with zero's
+    struct Matrix *matrix = MatrixByMask(rows, columns, mask);
+
+    for (int i = 0; i < rows; ++i) 
+    {
+        int size = (matrix->pRows[i]).size;
+
+        for (int j = 0; j < size; ++j) 
+        {
+            matrix->set(matrix, i, j, *(fullMask + i * columns + j));
+        }
+    }
+
+    return matrix;
+}
+
 // Matrix destructor
 int DestructorMatrix(struct Matrix* matrix) 
 {
