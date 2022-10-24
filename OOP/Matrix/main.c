@@ -20,10 +20,24 @@ int main(void)
     matrix2->print(matrix2);
 
     matrix1->at(matrix1, 1, 1);
-    printf("Last status code: %s", matrix1->getStatusCode(matrix1));
+    printf("Last status code: %s\n", matrix1->getStatusCode(matrix1));
 
     DestructorMatrix(matrix1);
     DestructorMatrix(matrix2);
+
+    int mask[5] = {1, 2, 3, 4, 5};
+
+    struct Matrix* matrixDefault = Matrix(5, 5);
+    struct Matrix* matrixMask = MatrixByMask(5, 5, mask);
+
+    printf("Matrix default:\n");
+    matrixMask->print(matrixDefault);
+
+    printf("Matrix by mask:\n");
+    matrixMask->print(matrixMask);
+
+    DestructorMatrix(matrixMask);
+    DestructorMatrix(matrixDefault);
 
     return 0;
 }

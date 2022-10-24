@@ -38,7 +38,7 @@ struct Matrix* MatrixParams(int rows, int columns, TYPE_ELEM *values)
 
     if (values == NULL) 
     {
-        // Zero initialiation
+        // Zero initialization
         for (int i = 0; i < rows; ++i)
         {
             matrix->pRows[i] = Row(columns);
@@ -77,6 +77,43 @@ struct Matrix* MatrixCopy(const struct Matrix* matrix)
     return cpMatrix;
 }
 
+// Matrix by mask (zero initialization)
+struct Matrix *MatrixByMask(int rows, int columns, int *mask) 
+{
+    // Memory allocation for matrix
+    struct Matrix *matrix = (struct Matrix *)malloc(sizeof(struct Matrix));
+
+    // Initialization fields of Matrix
+    matrix->pThis = matrix;
+    matrix->rows = rows;
+    matrix->columns = columns;
+
+    matrix->at = atMatrix;
+    matrix->set = setValueElementOfMatrix;
+    matrix->isSquare = isSquareMatrix;
+    matrix->det = detMatrix;
+
+    matrix->print = printMatrix;
+    matrix->setStatusCode = setStatusCodeOfMatrix;
+    matrix->getStatusCode = getStatusCodeOfMatrix;
+
+    // Memory allocation for rows
+    struct Row *pRows = (struct Row *)malloc(rows * sizeof(struct Row));
+
+    // Initialization rows
+    matrix->pRows = pRows;
+
+    // Memory allocation and zero initialization rows
+    for (int i = 0; i < rows; ++i) 
+    {
+        matrix->pRows[i] = Row(mask[i]);
+    }
+
+    matrix->setStatusCode(matrix, OK);
+
+    return matrix;
+}
+
 // Matrix destructor
 int DestructorMatrix(struct Matrix* matrix) 
 {
@@ -95,10 +132,10 @@ int DestructorMatrix(struct Matrix* matrix)
 // Access element of Matrix
 TYPE_ELEM atMatrix(const struct Matrix* matrix, int row, int column)
 {
-    if ((matrix->rows <= row) || (matrix->columns <= column)) 
+    if ((matrix->rows <= row) || ((matrix->pRows[row]).size <= column)) 
     {
         matrix->setStatusCode(matrix, BAD_INDEX);
-        return 0;
+        return -1;
     }
 
     TYPE_ELEM element = matrix->pRows[row].elements[column];
@@ -207,7 +244,12 @@ void printMatrix(const struct Matrix* matrix)
     {
         for (int j = 0; j < matrix->columns; ++j) 
         {
-            printf("%.3f\t", matrix->at(matrix, i, j));
+            TYPE_ELEM value = matrix->at(matrix, i, j); 
+            
+            if (value != -1) 
+            {
+                printf("%.3f\t", value);
+            }
         }
 
         printf("\n");
@@ -225,17 +267,13 @@ char* getStatusCodeOfMatrix(const struct Matrix* matrix)
 {
     switch (matrix->lastStatusCode)
     {
-        case (BAD_INDEX): 
-        {
-            return "BAD_INDEX";
-        }
         case (OK):
         {
             return "OK";
         }
-        case (ERROR):
+        case (BAD_INDEX):
         {
-            return "ERROR";
+            return "BAD_INDEX";
         }
         case (BAD_INPUT_VALUE):
         {
@@ -244,6 +282,10 @@ char* getStatusCodeOfMatrix(const struct Matrix* matrix)
         case (MEMORY_ALLOCATION_ERROR):
         {
             return "MEMORY_ALLOCATION_ERROR";
+        }
+        case (INITIALIZATION_ERROR):
+        {
+            return "INITIALIZATION_ERROR";
         }
     }
 
