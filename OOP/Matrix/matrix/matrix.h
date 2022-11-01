@@ -234,7 +234,7 @@ TYPE_ELEM detMatrix(const struct Matrix*);
 /*
     private
 
-    Realization Matrix::det
+    Realization Matrix::minorMatrix
 
     Create minor matrix (not number - matrix)
 */
