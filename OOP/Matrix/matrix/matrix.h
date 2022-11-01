@@ -33,30 +33,112 @@ struct Matrix
 {
     /* private */
 
+    /*
+        Fields
+    */
+
+    /*
+        private
+
+        Pointer to current object
+    */
     struct Matrix* pThis;
 
+    /*
+        private
+
+        Number of rows in matrix
+    */
     int rows;
+
+    /*
+        private
+
+        Number of columns in matrix
+    */
     int columns;
+
+    /*
+        private
+
+        Pointer to matrix rows
+    */
     struct Row *pRows;
 
+    /*
+        private
+
+        Status of the execution code of the last operation on the matrix
+    */
     enum STATUS_CODE lastStatusCode;
 
     /* public */
 
     /*
-        Functions for computed matrix
+        Methods
     */
 
+    /*
+        public
+
+        Access element of Matrix
+    */
     FuncAt at;
+
+    /*
+        public
+
+        Change value element of Matrix
+    */
     FuncSet set;
+
+    /*
+        public
+
+        Check if matrix is ​​square
+    */
     FuncIsSquare isSquare;
+
+    /*
+        public
+
+        Computed determinant of matrix
+    */
     FuncDetMatrix det;
+
+    /*
+        public
+
+        Create minor matrix (not number - matrix)
+    */
     FuncMinorMatrix minorMatrix;
 
+    /*
+        public
+
+        Sum of two matrix (return new matrix)
+    */
     FuncSumMatrix sum;
 
+    /*
+        public
+
+        Print matrix
+    */
     FuncPrintMatrix print;
+
+    /*
+        public
+
+        Set status code of complete last operation
+    */
     FuncSetStatusCode setStatusCode;
+
+    /*
+        public
+
+        Get status code of complete last operation
+    */
     FuncGetStatusCode getStatusCode;
 };
 
@@ -64,49 +146,134 @@ struct Matrix
     Functions for working with Matrix.
 */
 
-// Matrix default constructor
+/*
+    public
+
+    Matrix default constructor
+*/
 struct Matrix* Matrix(int, int);
 
-// Matrix constructor with parameters
+/*
+    public
+
+    Matrix constructor with parameters
+*/
 struct Matrix* MatrixParams(int, int, TYPE_ELEM *);
 
-// Matrix copy constructor
+/*
+    public
+
+    Matrix copy constructor
+*/
 struct Matrix* MatrixCopy(const struct Matrix*);
 
-// Matrix by mask (zero initialization)
+/*
+    public
+
+    Matrix by mask (zero initialization)
+*/
 struct Matrix* MatrixByMask(int, int, int*);
 
-// Matrix by mask with values
+/*
+    public
+
+    Matrix by mask with values
+*/
 struct Matrix* MatrixByFullMask(int, int, int*, TYPE_ELEM *);
 
-// Matrix destructor
+/*
+    public
+
+    Matrix destructor
+*/
 int DestructorMatrix(struct Matrix*);
 
-// Access element of Matrix
+/*
+    private
+
+    Methods initialization
+*/
+void methodInit(struct Matrix*);
+
+/*
+    private
+
+    Realization Matrix::at
+
+    Access element of Matrix
+*/
 TYPE_ELEM atMatrix(const struct Matrix*, int, int);
 
-// Change value element of Matrix
+/*
+    private
+
+    Realization Matrix::set
+
+    Change value element of Matrix
+*/
 void setValueElementOfMatrix(struct Matrix*, int, int, TYPE_ELEM);
 
-// Check if matrix is ​​square
+/*
+    private
+
+    Realization Matrix::isSquare
+
+    Check if matrix is ​​square
+*/
 int isSquareMatrix(const struct Matrix*);
 
-// Computed determinant of matrix
+/*
+    private
+
+    Realization Matrix::det
+
+    Computed determinant of matrix
+*/
 TYPE_ELEM detMatrix(const struct Matrix*);
 
-// Create minor matrix (not number - matrix)
+/*
+    private
+
+    Realization Matrix::det
+
+    Create minor matrix (not number - matrix)
+*/
 struct Matrix* createMinorMatrix(const struct Matrix*, int, int);
 
-// Sum of two matrix (return new matrix)
+/*
+    private
+
+    Realization Matrix::sum
+
+    Sum of two matrix (return new matrix)
+*/
 struct Matrix *sumMatrix(const struct Matrix *, const struct Matrix *);
 
-// Print matrix
+/*
+    private
+
+    Realization Matrix::print
+
+    Print matrix
+*/
 void printMatrix(const struct Matrix*);
 
-// Set status code of complete last operation
+/*
+    private
+
+    Realization Matrix::setStatusCode
+
+    Set status code of complete last operation
+*/
 void setStatusCodeOfMatrix(struct Matrix*, enum STATUS_CODE);
 
-// Get status code of complete last operation
+/*
+    private
+
+    Realization Matrix::getStatusCode
+
+    Get status code of complete last operation
+*/
 char* getStatusCodeOfMatrix(const struct Matrix*);
 
 #undef __COMPILATION__

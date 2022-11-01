@@ -21,18 +21,6 @@ struct Matrix* MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->rows = rows;
     matrix->columns = columns;
 
-    matrix->at = atMatrix;
-    matrix->set = setValueElementOfMatrix;
-    matrix->isSquare = isSquareMatrix;
-    matrix->det = detMatrix;
-    matrix->minorMatrix = createMinorMatrix;
-
-    matrix->sum = sumMatrix;
-
-    matrix->print = printMatrix;
-    matrix->setStatusCode = setStatusCodeOfMatrix;
-    matrix->getStatusCode = getStatusCodeOfMatrix;
-
     // Memory allocation for rows
     struct Row *pRows = (struct Row*)malloc(rows * sizeof(struct Row));
 
@@ -137,7 +125,11 @@ struct Matrix *MatrixByFullMask(int rows, int columns, int *mask, TYPE_ELEM *ful
     return matrix;
 }
 
-// Matrix destructor
+/*
+    public
+
+    Matrix destructor
+*/
 int DestructorMatrix(struct Matrix* matrix) 
 {
     // Call destructor for rows
@@ -150,6 +142,37 @@ int DestructorMatrix(struct Matrix* matrix)
     free(matrix->pThis);
 
     return 0;
+}
+
+/*
+    private
+
+    Method initialization
+*/
+void methodInit(struct Matrix *matrix) 
+{
+    /*
+        Initialization method of matrix
+    */
+
+    // Getter and Setter
+    matrix->at = atMatrix;
+    matrix->set = setValueElementOfMatrix;
+
+    // Matrix determinant calculation
+    matrix->isSquare = isSquareMatrix;
+    matrix->det = detMatrix;
+    matrix->minorMatrix = createMinorMatrix;
+
+    // Elementary transformations over matrices
+    matrix->sum = sumMatrix;
+
+    // Displaying the matrix
+    matrix->print = printMatrix;
+
+    // Working with status code
+    matrix->setStatusCode = setStatusCodeOfMatrix;
+    matrix->getStatusCode = getStatusCodeOfMatrix;
 }
 
 // Access element of Matrix
