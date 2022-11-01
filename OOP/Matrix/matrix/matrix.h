@@ -53,6 +53,8 @@ struct Matrix
     FuncDetMatrix det;
     FuncMinorMatrix minorMatrix;
 
+    FuncSumMatrix sum;
+
     FuncPrintMatrix print;
     FuncSetStatusCode setStatusCode;
     FuncGetStatusCode getStatusCode;
@@ -94,6 +96,9 @@ TYPE_ELEM detMatrix(const struct Matrix*);
 
 // Create minor matrix (not number - matrix)
 struct Matrix* createMinorMatrix(const struct Matrix*, int, int);
+
+// Sum of two matrix (return new matrix)
+struct Matrix *sumMatrix(const struct Matrix *, const struct Matrix *);
 
 // Print matrix
 void printMatrix(const struct Matrix*);

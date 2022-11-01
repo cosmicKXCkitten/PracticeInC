@@ -27,6 +27,8 @@ struct Matrix* MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->det = detMatrix;
     matrix->minorMatrix = createMinorMatrix;
 
+    matrix->sum = sumMatrix;
+
     matrix->print = printMatrix;
     matrix->setStatusCode = setStatusCodeOfMatrix;
     matrix->getStatusCode = getStatusCodeOfMatrix;
@@ -296,6 +298,29 @@ struct Matrix *createMinorMatrix(const struct Matrix *matrix, int rowDeleted, in
     }
 
     matrix->setStatusCode(matrix, BAD_OPERATION);
+}
+
+// Sum of two matrix (return new matrix)
+struct Matrix *sumMatrix(const struct Matrix *matrix1, const struct Matrix *matrix2) 
+{
+    struct Matrix* result = Matrix(matrix1->rows, matrix1->columns);
+
+    if (((matrix1->rows) == (matrix2->rows)) && ((matrix1->columns) == (matrix2->columns))) 
+    {
+        for (int i = 0; i < matrix1->rows; ++i) 
+        {
+            for (int j = 0; j < matrix1->columns; ++j) 
+            {
+                result->set(result, i, j, matrix1->at(matrix1, i, j) + matrix2->at(matrix2, i, j));
+            }
+        }
+    }
+    else 
+    {
+        result->setStatusCode(result, BAD_INPUT_VALUE);
+    }
+
+    return result;
 }
 
 // Print matrix

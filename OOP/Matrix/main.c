@@ -1,48 +1,44 @@
 #include <stdio.h>
+#include "row.h"
 #include "matrix.h"
 
 int main(void) 
 {
-    TYPE_ELEM m[3][3] =
+    TYPE_ELEM a[3][3] =
     {
-        {15, 452, 32},
-        {54, 15, 60},
-        {76, 87, 90},
+        {1, 1, 2},
+        {3, 4, 5},
+        {6, 7, 8},
     };
 
-    struct Matrix* matrix1 = MatrixParams(3, 3, m);
-    struct Matrix* matrix2 = MatrixCopy(matrix1);    
+    TYPE_ELEM b[3][3] =
+    {
+        {1, 1, 2},
+        {3, 4, 5},
+        {6, 7, 8},
+    };
 
-    printf("Matrix1:\n");
+    struct Matrix* matrix1 = MatrixParams(3, 3, a);
+    struct Matrix* matrix2 = MatrixParams(3, 3, b);
+
+    struct Matrix* result = matrix1->sum(matrix1, matrix2);
+    
+    printf("Matrix A:\n");
     matrix1->print(matrix1);
 
-    printf("Matrix2:\n");
+    printf("Matrix B:\n");
     matrix2->print(matrix2);
 
-    matrix1->at(matrix1, 1, 1);
-    printf("Last status code: %s\n", matrix1->getStatusCode(matrix1));
+    printf("Matrix A + B:\n");
+    result->print(result);
 
-    printf("det(Matrix1) = %.3f\n", matrix1->det(matrix1));
+    printf("det(A) = %.3f", matrix1->det(matrix1));
+
+    printf("\n%.3f\n", matrix1->at(matrix1, 0, 0));
 
     DestructorMatrix(matrix1);
     DestructorMatrix(matrix2);
-
-    int mask[3] = {3, 2, 1};
-
-    double fullMask[3][3] = 
-    {
-        {1, 2, 3},
-        {4, 5, 0},
-        {6, 0, 0},
-    };
-
-    struct Matrix* matrixFullMask = MatrixByFullMask(3, 3, mask, fullMask);
-    printf("Matrix by full mask:\n");
-    matrixFullMask->print(matrixFullMask);
-
-    printf("det(matrixByFullMask): %.3f", matrixFullMask->det(matrixFullMask));
-
-    DestructorMatrix(matrixFullMask);
+    DestructorMatrix(result);
 
     return 0;
 }
