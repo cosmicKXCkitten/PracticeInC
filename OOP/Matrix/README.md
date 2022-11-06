@@ -1,41 +1,6 @@
 # MATRIX class on C programming language
 Main rule: one file - one class
 
-# main.c output
-Matrix1:
+## Implementation of matrices in C...
 
-0.010   0.020	
-
-0.030   0.040	
-
-Matrix2:
-
-0.010   0.020
-
-0.030   0.040
-
-Last status code: OK
-
-Matrix default:
-
-0.000   0.000   0.000   0.000   0.000
-
-0.000   0.000   0.000   0.000   0.000
-
-0.000   0.000   0.000   0.000   0.000
-
-0.000   0.000   0.000   0.000   0.000
-
-0.000   0.000   0.000   0.000   0.000
-
-Matrix by mask:
-
-0.000	
-
-0.000  0.000	
-
-0.000  0.000  0.000	
-
-0.000  0.000  0.000  0.000	
-
-0.000  0.000  0.000  0.000  0.000	
+Here's what has been done:
