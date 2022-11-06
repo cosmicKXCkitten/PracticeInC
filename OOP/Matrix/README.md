@@ -6,10 +6,10 @@ Main rule: one file - one class
 
 ### Here's what has been done:
 
-1. **Default matrix constructor**
+- **Default matrix constructor**
 
 `struct Matrix* matrix = Matrix(m, n);`
 
 Creates a matrix on the heap with m rows and n columns of elements, filled with zeros.
 
-2. **Matrix constructor with parameter**
+- **Matrix constructor with parameter**
