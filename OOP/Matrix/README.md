@@ -6,7 +6,7 @@ Main rule: one file - one class
 
 ### Here's what has been done:
 
-- **Default matrix constructor**
+- **DEFAULT MATRIX CONSTRUCTOR**
 
 ```
 // rows
@@ -19,7 +19,7 @@ struct Matrix* matrix = Matrix(m, n);
 
 Creates a matrix on the heap with m rows and n columns of elements, filled with zeros.
 
-- **Matrix constructor with parameter**
+- **MATRIX CONSTRUCTOR WITH PARAMETER**
 
 ```
 double data[3][3] = 
