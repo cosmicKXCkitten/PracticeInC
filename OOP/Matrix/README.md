@@ -7,6 +7,7 @@ Main rule: one file - one class
 ### Here's what has been done:
 
 
+
 - **DEFAULT MATRIX CONSTRUCTOR**
 
 ```
@@ -19,6 +20,7 @@ struct Matrix* matrix = Matrix(m, n);
 ```
 
 Creates a matrix on the heap with m rows and n columns of elements, filled with zeros.
+
 
 
 - **MATRIX CONSTRUCTOR WITH PARAMETER**
@@ -35,6 +37,7 @@ struct Matrix* matrix = MatrixParams(3, 3, data);
 ```
 
 Creates a matrix on the heap filled with the data that is passed in the parameter (in this case, data). The sizes of data[][] and those passed to the constructor parameters must match!
+
 
 
 - **MATRIX COPY CONSTRUCTOR**
