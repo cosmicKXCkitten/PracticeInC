@@ -48,3 +48,18 @@ struct Matrix* matrix2 = MatrixCopy(matrix1);
 ```
 
 Creates a matrix on the heap that is a copy of the matrix passed as a parameter to the copy constructor.
+
+- **MATRIX DESTRUCTOR**
+
+```
+// rows
+int m = 3;
+// columns
+int n = 4;
+
+struct Matrix* matrix = Matrix(m, n);
+
+DestructorMatrix(matrix);
+```
+
+Since the matrix is ​​a complex object and the memory for it is allocated on the heap, it needs a special constructor. ***ATTENTION*** - be sure to use the destructor ***EVERY TIME*** after working with matrices.
