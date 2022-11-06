@@ -8,7 +8,14 @@ Main rule: one file - one class
 
 - **Default matrix constructor**
 
-`struct Matrix* matrix = Matrix(m, n);`
+```
+// rows
+int m = 3;
+// columns
+int n = 5;
+
+struct Matrix* matrix = Matrix(m, n);
+```
 
 Creates a matrix on the heap with m rows and n columns of elements, filled with zeros.
 
