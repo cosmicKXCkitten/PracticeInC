@@ -21,6 +21,10 @@ struct Matrix* MatrixParams(int rows, int columns, TYPE_ELEM *values)
     matrix->rows = rows;
     matrix->columns = columns;
 
+    matrix->methodsInit = methodsInit;
+
+    matrix->methodsInit(matrix);
+
     // Memory allocation for rows
     struct Row *pRows = (struct Row*)malloc(rows * sizeof(struct Row));
 
@@ -149,7 +153,7 @@ int DestructorMatrix(struct Matrix* matrix)
 
     Method initialization
 */
-void methodInit(struct Matrix *matrix) 
+void methodsInit(struct Matrix *matrix) 
 {
     /*
         Initialization method of matrix

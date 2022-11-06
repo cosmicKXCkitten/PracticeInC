@@ -34,10 +34,6 @@ struct Matrix
     /* private */
 
     /*
-        Fields
-    */
-
-    /*
         private
 
         Pointer to current object
@@ -72,11 +68,14 @@ struct Matrix
     */
     enum STATUS_CODE lastStatusCode;
 
-    /* public */
-
     /*
-        Methods
+        private
+
+        Methods initialization
     */
+    FuncMethodsInit methodsInit;
+
+    /* public */
 
     /*
         public
@@ -193,7 +192,7 @@ int DestructorMatrix(struct Matrix*);
 
     Methods initialization
 */
-void methodInit(struct Matrix*);
+void methodsInit(struct Matrix*);
 
 /*
     private

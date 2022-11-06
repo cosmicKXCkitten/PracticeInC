@@ -12,6 +12,8 @@
 struct Matrix;
 enum STATUS_CODE;
 
+typedef void (*FuncMethodsInit) (struct Matrix*);
+
 typedef TYPE_ELEM (*FuncAt) (const struct Matrix*, int, int);
 typedef void (*FuncSet) (struct Matrix*, int, int, TYPE_ELEM);
 typedef int (*FuncIsSquare) (const struct Matrix*);
