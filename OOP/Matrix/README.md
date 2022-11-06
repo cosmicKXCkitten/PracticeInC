@@ -1,6 +1,6 @@
 # MATRIX class on C programming language
 
-Main rule: one file - one class
+Basically, the expected behavior is implemented.
 
 ## Implementation of matrices in C...
 
