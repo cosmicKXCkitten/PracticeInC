@@ -76,7 +76,7 @@ Since the matrix is ​​a complex object and the memory for it is allocated on
     [1] **matrix.at()**
 
     ```
-    // will return the matrix element in i - row and j - column
+    // will return the matrix element in i row and j column
     matrix.at(&matrix, i, j);
     ```
 
@@ -85,5 +85,9 @@ Since the matrix is ​​a complex object and the memory for it is allocated on
     [2] **matrix.set()**
 
     ```
+    //sets the value of the matrix element at position (i, j) to value
+    matrix.set(&matrix, i, j, value);
     ```
+
+    Sets the value of the passed argument as the desired element of the matrix. When going out of bounds, changes the state of the matrix to BAD_INDEX.
 
