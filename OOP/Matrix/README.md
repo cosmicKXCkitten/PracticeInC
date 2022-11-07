@@ -73,7 +73,7 @@ Since the matrix is ​​a complex object and the memory for it is allocated on
 
 - **METHODS FOR WORKING WITH MATRIXES**
 
-    1. **matrix.at()**
+    1 **matrix.at()**
 
     ```
     // will return the matrix element in i - row and j - column
@@ -82,7 +82,7 @@ Since the matrix is ​​a complex object and the memory for it is allocated on
 
     Matrix element access method. When going out of bounds, changes the state of the matrix to BAD_INDEX.
 
-    2. **matrix.set()**
+    2 **matrix.set()**
 
     ```
     ```
