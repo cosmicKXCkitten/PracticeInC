@@ -70,3 +70,20 @@ DestructorMatrix(matrix);
 ```
 
 Since the matrix is ​​a complex object and the memory for it is allocated on the heap, it needs a special constructor. ***ATTENTION*** - be sure to use the destructor ***EVERY TIME*** after working with matrices.
+
+- **METHODS FOR WORKING WITH MATRIXES**
+
+    1. **matrix.at()**
+
+    ```
+    // will return the matrix element in i - row and j - column
+    matrix.at(&matrix, i, j);
+    ```
+
+    Matrix element access method. When going out of bounds, changes the state of the matrix to BAD_INDEX.
+
+    2. **matrix.set()**
+
+    ```
+    ```
+
