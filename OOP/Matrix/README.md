@@ -1,6 +1,6 @@
 # MATRIX class on C programming language
 
-![Insert from the matrix - a conversation with the architect](assets/ConvWithArchitect.gif)
+![Insert from the matrix - a conversation with the architect](assets/ConvWithArchitectEng.gif)
 
 Basically, the expected behavior is implemented.
 
