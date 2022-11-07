@@ -15,6 +15,8 @@ int m = 3;
 int n = 4;
 
 struct Matrix* matrix = Matrix(m, n);
+
+DestructorMatrix(matrix);
 ```
 
 Creates a matrix on the heap with m rows and n columns of elements, filled with zeros.
@@ -30,6 +32,8 @@ double data[3][3] =
 };
 
 struct Matrix* matrix = MatrixParams(3, 3, data);
+
+DestructorMatrix(matrix);
 ```
 
 Creates a matrix on the heap filled with the data that is passed in the parameter (in this case, data). The sizes of data[][] and those passed to the constructor parameters must match!
@@ -45,6 +49,9 @@ int n = 4;
 struct Matrix* matrix1 = Matrix(m, n);
 
 struct Matrix* matrix2 = MatrixCopy(matrix1);
+
+DestructorMatrix(matrix1);
+DestructorMatrix(matrix2);
 ```
 
 Creates a matrix on the heap that is a copy of the matrix passed as a parameter to the copy constructor.
