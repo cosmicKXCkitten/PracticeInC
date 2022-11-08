@@ -83,15 +83,9 @@ struct Matrix *MatrixByMask(int rows, int columns, int *mask)
     matrix->rows = rows;
     matrix->columns = columns;
 
-    matrix->at = atMatrix;
-    matrix->set = setValueElementOfMatrix;
-    matrix->isSquare = isSquareMatrix;
-    matrix->det = detMatrix;
-    matrix->minorMatrix = createMinorMatrix;
+    matrix->methodsInit = methodsInit;
 
-    matrix->print = printMatrix;
-    matrix->setStatusCode = setStatusCodeOfMatrix;
-    matrix->getStatusCode = getStatusCodeOfMatrix;
+    matrix->methodsInit(matrix);
 
     // Memory allocation for rows
     struct Row *pRows = (struct Row *)malloc(rows * sizeof(struct Row));
@@ -170,6 +164,7 @@ void methodsInit(struct Matrix *matrix)
 
     // Elementary transformations over matrices
     matrix->sum = sumMatrix;
+    matrix->difference = differenceMatrix;
 
     // Displaying the matrix
     matrix->print = printMatrix;
@@ -343,6 +338,29 @@ struct Matrix *sumMatrix(const struct Matrix *matrix1, const struct Matrix *matr
         }
     }
     else 
+    {
+        result->setStatusCode(result, BAD_INPUT_VALUE);
+    }
+
+    return result;
+}
+
+// Difference of two matrix (return new matrix)
+struct Matrix *differenceMatrix(const struct Matrix *matrix1, const struct Matrix *matrix2) 
+{
+    struct Matrix *result = Matrix(matrix1->rows, matrix1->columns);
+
+    if (((matrix1->rows) == (matrix2->rows)) && ((matrix1->columns) == (matrix2->columns)))
+    {
+        for (int i = 0; i < matrix1->rows; ++i)
+        {
+            for (int j = 0; j < matrix1->columns; ++j)
+            {
+                result->set(result, i, j, matrix1->at(matrix1, i, j) - matrix2->at(matrix2, i, j));
+            }
+        }
+    }
+    else
     {
         result->setStatusCode(result, BAD_INPUT_VALUE);
     }

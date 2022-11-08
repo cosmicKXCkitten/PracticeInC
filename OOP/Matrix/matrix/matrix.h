@@ -122,6 +122,13 @@ struct Matrix
     /*
         public
 
+        Difference of two matrix (return new matrix)
+    */
+    FuncDifferenceMatrix difference;
+
+    /*
+        public
+
         Print matrix
     */
     FuncPrintMatrix print;
@@ -247,6 +254,15 @@ struct Matrix* createMinorMatrix(const struct Matrix*, int, int);
     Sum of two matrix (return new matrix)
 */
 struct Matrix *sumMatrix(const struct Matrix *, const struct Matrix *);
+
+/*
+    private
+
+    Realization Matrix::difference
+
+    Difference of two matrix (return new matrix)
+*/
+struct Matrix *differenceMatrix(const struct Matrix *, const struct Matrix *);
 
 /*
     private

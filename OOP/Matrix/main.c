@@ -12,15 +12,15 @@ int main(void)
 
     TYPE_ELEM b[3][3] =
     {
-        {1, 1, 2},
-        {3, 4, 5},
-        {6, 7, 8},
+        {2, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9},
     };
 
     struct Matrix* matrix1 = MatrixParams(3, 3, a);
     struct Matrix* matrix2 = MatrixParams(3, 3, b);
 
-    struct Matrix* result = matrix1->sum(matrix1, matrix2);
+    struct Matrix* sum = matrix1->sum(matrix1, matrix2);
     
     printf("Matrix A:\n");
     matrix1->print(matrix1);
@@ -29,7 +29,12 @@ int main(void)
     matrix2->print(matrix2);
 
     printf("Matrix A + B:\n");
-    result->print(result);
+    sum->print(sum);
+
+    struct Matrix* difference = matrix1->difference(matrix1, matrix2);
+
+    printf("Matrix A - B:\n");
+    difference->print(difference);
 
     printf("det(A) = %.3f", matrix1->det(matrix1));
 
@@ -37,7 +42,8 @@ int main(void)
 
     DestructorMatrix(matrix1);
     DestructorMatrix(matrix2);
-    DestructorMatrix(result);
+    DestructorMatrix(sum);
+    DestructorMatrix(difference);
 
     return 0;
 }
