@@ -20,8 +20,10 @@ int main(void)
     struct Matrix* matrix1 = MatrixParams(3, 3, a);
     struct Matrix* matrix2 = MatrixParams(3, 3, b);
 
+    printf("%d\n", matrix1->equals(matrix1, matrix2));
+
     struct Matrix* sum = matrix1->sum(matrix1, matrix2);
-    
+
     printf("Matrix A:\n");
     matrix1->print(matrix1);
 
