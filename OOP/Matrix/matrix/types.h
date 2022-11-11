@@ -24,6 +24,8 @@ typedef struct Matrix* (*FuncMinorMatrix) (const struct Matrix*, int, int);
 typedef struct Matrix *(*FuncSumMatrix)(const struct Matrix *, const struct Matrix *);
 typedef struct Matrix *(*FuncDifferenceMatrix)(const struct Matrix *, const struct Matrix *);
 
+typedef int (*FuncEqualsMatrix)(const struct Matrix *, const struct Matrix *);
+
 typedef void (*FuncPrintMatrix) (const struct Matrix*);
 
 typedef void (*FuncSetStatusCode) (struct Matrix*, enum STATUS_CODE);

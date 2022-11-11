@@ -166,6 +166,9 @@ void methodsInit(struct Matrix *matrix)
     matrix->sum = sumMatrix;
     matrix->difference = differenceMatrix;
 
+    // Logical operations with matrices
+    matrix->equals = equalsMatrix;
+
     // Displaying the matrix
     matrix->print = printMatrix;
 
@@ -366,6 +369,30 @@ struct Matrix *differenceMatrix(const struct Matrix *matrix1, const struct Matri
     }
 
     return result;
+}
+
+// Element-by-element comparison of matrices
+int equalsMatrix(const struct Matrix *matrix1, const struct Matrix *matrix2) 
+{
+    if (((matrix1->rows) == (matrix2->rows)) && ((matrix1->columns) == (matrix2->columns)))
+    {
+        for (int i = 0; i < matrix1->rows; ++i) 
+        {
+            for (int j = 0; j < matrix1->columns; ++j) 
+            {
+                if (matrix1->at(matrix1, i, j) != matrix2->at(matrix2, i, j)) 
+                {
+                    return 0;
+                }
+            }
+        }
+    }
+    else
+    {
+        return 0;
+    }
+
+    return 1;
 }
 
 // Print matrix

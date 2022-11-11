@@ -129,6 +129,13 @@ struct Matrix
     /*
         public
 
+        Element-by-element comparison of matrices
+    */
+   FuncEqualsMatrix equals;
+
+    /*
+        public
+
         Print matrix
     */
     FuncPrintMatrix print;
@@ -263,6 +270,15 @@ struct Matrix *sumMatrix(const struct Matrix *, const struct Matrix *);
     Difference of two matrix (return new matrix)
 */
 struct Matrix *differenceMatrix(const struct Matrix *, const struct Matrix *);
+
+/*
+    private
+
+    Realization Matrix::equals
+
+    Element-by-element comparison of matrices
+*/
+int equalsMatrix(const struct Matrix *, const struct Matrix *);
 
 /*
     private
